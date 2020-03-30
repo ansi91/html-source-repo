@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	var a=1;
+	document.write("<h2><font color='blue' size='19px'></font></h2>")
+	document.write("b="+ ++a+ "<br>");
+	document.write("b="+ a++ +"<br>"); //뒤에 있을때는 출력 먼저
+	document.write("b=" +a+ "<br>");
+	document.write("b="+ a-- + "<br>");
+	document.write("b=" + a + "<br>");
+	document.write("<hr>");
+</script>
+	
+	<script type="text/javascript">
+		var x=10;
+		y=x++; document.write("<h2><font color='blue' size='19px'></font></h2>") //y=10;, x=11;
+		x=++y; document.write("x=" + x + "y=" + y+"<br>");
+		y=x--; document.write("x="+  x + "y=" + y +"<br>");
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+/*Fetch API이용하면 Request나 Response와 같은 HTTP 통신을 구성하는 요소를 조작하는 것이 가능하다
+비동기 통신을 구현할 수 있다.
+*/
+	var result=' ';
+	fetch('http://localhost:8000/javascript/EasyUI/datagrid/DeptList.jsp').then(function(response){
+		return response.json();
+	})
+	.then(function(myJson){
+		console.log(JSON.stringify(myJson));
+		result = JSON.stringify(myJson);
+		jsonDoc = JSON.parse(result);
+		//document.getElementById("d_here").innerText = jsonDoc;
+		var temp='';
+		temp+="<p>";
+	
+		for(var i=0;i<jsonDoc.length;i++){
+			//alert(jsonDoc[i].DNAME+", "+jsonDoc[i].LOC);
+			temp+="<h1>"+jsonDoc[i].loc+"</h1>";
+		temp+="</p>";
+		document.getElementById("d_here").innerHTML=temp;
+		}
+	});
+</script>
+<div id="d_here"></div>
+</body>
+</html>

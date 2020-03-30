@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- before에서 함수를 즉시 실행하면 null이 박힌다. => element 다음에 호출해야 한다
+<script type="text/javascript">//before
+				var v_msg=document.getElementById("d_msg");
+				console.log("v_msg:"+v_msg);
+			</script>
+ -->	
+<script>
+	function confirm(){
+		var v_msg = document.getElementById("d_msg");
+		//v_msg.innerText=v_msg;
+			v_msg.innerHTML="<font color='red'><h1>after</h1>"+v_msg;
+	}
+</script>
+
+<div id="d_msg">당신의 아이디를 입력하세요.[안내]</div>
+
+<!-- after -->
+<script type="text/javascript">//before
+	var v_msg=document.getElementById("d_msg");
+	console.log("after v_msg:"+v_msg);
+	
+</script>
+<button onClick="confirm()">확인</button>
+
+</body>
+</html>

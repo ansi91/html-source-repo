@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사원관리 - EasyUI</title>
+
+	<link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+	
+	<script>
+		function empList(){
+			
+			 
+		}
+		
+		function empInsert(){
+			 $('#empInsert').dialog('open').dialog('center').dialog('setTitle','사원등록');
+		}
+		
+		function empUpdate(){
+			
+		}
+		
+		function empDelete(){
+			
+		}
+	</script>
+	<style>
+	
+	</style>
+
+
+</head>
+<body>
+<!--
+==========================================================================================================
+																		사원 조회 코드 시작
+==========================================================================================================
+  -->
+<table  title="사원관리" align='center' class='easyui-datagrid' width="800px"  toolbar='#tb_emp'>
+		<thead>
+			<tr>
+			   
+				<th field="empno" width="120" align="center">사원번호</th>
+				<th field="ename" width="150" align="center">사원이름</th>
+				<th field="job" width="150" align="center">직업</th>
+				<th field="hiredate" width="150" align="center">입사일자</th>
+			</tr>
+		</thead>
+</table>
+
+	<div id="tb_emp">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="empList()">조회</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="empInsert()">입력</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="empUpdate()">수정</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="empDelete()">삭제</a>
+    </div>
+ 
+ <!--
+==========================================================================================================
+																				사원 조회 끝
+==========================================================================================================
+  -->   
+  
+ 
+ <!--
+==========================================================================================================
+																	  	사원정보 입력 시작
+==========================================================================================================
+  -->
+  
+	<div id="empInsert" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#empInsert_btn'">
+        <form id="f_ins" method="get" novalidate style="margin:0;padding:20px 50px">
+    
+            <div style="margin-bottom:10px">
+            	
+                <input id="empno" name="empno" class="easyui-textbox" required="true" label="사원번호:" style="width:100%">
+            </div>
+            <div style="margin-bottom:10px">
+                <input id="ename" name="ename" class="easyui-textbox" required="true" label="사원명:" style="width:100%">
+            </div>
+            <div style="margin-bottom:10px">
+                <input id="job" name="job" class="easyui-textbox" required="true" label="직업:" style="width:100%">
+            </div>
+            <div style="margin-bottom:10px">
+                <input id="mgr" name="mgr" class="easyui-textbox" required="true"  label="매니저" style="width:100%">
+            </div>
+              <div style="margin-bottom:10px">
+                <input id="hiredate" name="hiredate" class="easyui-textbox" required="true"  label="입사일자" style="width:100%">
+            </div>
+            <div style="margin-bottom:10px">
+                <input id="sal" name="sal" class="easyui-textbox" required="true"  label="급여" style="width:100%">
+            </div>
+            <div style="margin-bottom:10px">
+                <input id="comm" name="comm" class="easyui-textbox" required="true"  label="급여 보너스" style="width:100%">
+            </div>
+            <div style="margin-bottom:10px">
+                <input id="deptno" name="deptno" class="easyui-textbox" required="true"  label="부서 번호" style="width:100%">
+            </div>
+            
+        </form>
+    </div>
+    <div id="empInsert_btn">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">Save</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#empInsert').dialog('close')" style="width:90px">Cancel</a>
+    </div>
+
+<!--
+==========================================================================================================
+																			사원정보 입력 끝
+==========================================================================================================
+  -->
+
+</body>
+</html>

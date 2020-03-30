@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ready demo</title>
+  <style>
+  h1 {color: aqua;}
+   #d_test{color:tomato;} 
+   #n_test > h2 > ul > li{color:green;}	
+  	li{color:red;}
+  
+  
+  </style>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script>
+ 
+  $(function() {
+    $( "h1" ).text( "The DOM is now loaded and can be manipulated." );
+  });
+ 
+  </script>
+ 
+</head>
+<body>
+ 
+<h1>Not loaded yet.</h1>
+ <div id="d_test">안녕하세요</div>
+ <nav id="n_test">
+ <h2>
+	 <ul>
+	 	<li>JAVA</li>
+	 	<li>ORACLE</li>
+	 	<li>JAVASCRIPT</li>
+	 </ul>
+ </h2>
+ </nav>
+</body>
+</html>

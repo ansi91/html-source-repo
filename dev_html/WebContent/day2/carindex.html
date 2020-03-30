@@ -9,21 +9,18 @@
 	{
 	background:tomato;
 	color:white;
-	border-bottom:6px solid black;
+	border-bottom:5px dashed pink;
 	}
 	
 a{text-decoration:none;}	
 li{list-style:none;}
 
-#main_nav
-	{
-		overflow:hidden;
-	}	
-#main_nav > ul.left
-	{
-		overflow:hidden;
-		float:left;
-	}	
+ #main_gnb {overflow:hidden; background-color:#fc6262; }
+ #main_gnb > ul.left > li{float:left; width:110px;}
+ #main_gnb > ul.left {float:left;}	
+ #main_gnb > ul.right {float:right;}
+ #main_gnb > ul.right > li {float:right; width:90px;}
+ #main_gnb a{color:white; font-weight:bold;}
 	
 
 
@@ -38,21 +35,24 @@ li{list-style:none;}
 			<!--   =========================	Header 영역==============================  -->
 			<tr height="50px">
 				<td id="main_header">
-				<h1>Header</h1>
+				<center><h1>Header</h1></center>
 				</td>
 			</tr>
 			<!--  ============================Navigation 영역============================   -->
 			<tr height="50px">
 				<td>
-					<nav id="main_nav"> 
-						<ul class="left">
-							<li a href="#">JAVA</li>
-							<li a href="#">ORACLE</li>
-							<li a href="#">HTML5</li>
-							<li a href="#">JAVASCRIPT</li>
-							<li a href="#">PYTHON</li>
-						</ul>
-					</nav>
+					<nav id="main_gnb">
+ 	<ul class="left">
+		<li><a href="#">JAVA수업</a></li>
+		<li><a href="#">ORACLE수업</a></li>
+		<li><a href="#">HTML5수업</a></li>
+ 	</ul>
+ 	<ul class="right">
+ 		<li><a href="#">로그인</a></li>
+		<li><a href="#">회원가입</a></li>
+ 	</ul>
+ 	
+ </nav>
 				</td>
 			</tr>
 			<!--  =============================body 영역=================================   -->
