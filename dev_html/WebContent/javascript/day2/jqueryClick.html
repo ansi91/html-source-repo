@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style>
+	*{margin:0px; padding:0px;}
+	div{
+			margin:5px;padding:3px;
+			border: 3px solid green;
+			border-radius:50px;
+											}
+</style>
+</head>
+<body>
+  <script type="text/javascript">
+  	$(document).ready(function (){
+  		$('div').click(function(){ //onclick에서 on만 빼면 표준 이벤트 동일
+  			var header = $(this).find('h1').text();
+  			var paragraph = $(this).find('p').text();
+  			alert(header+'\n'+paragraph);
+  		});
+  	});
+  	</script>
+	<div>
+		<h1>Header 1</h1>
+		<p>Paragraph 1</p>
+	</div>
+	<div>
+		<h1>Header 2</h1>
+		<p>Paragraph</p>
+	</div>
+	<div>
+		<h1>Header 3</h1>
+		<p>Paragraph</p>
+	</div>
+</body>
+</html>

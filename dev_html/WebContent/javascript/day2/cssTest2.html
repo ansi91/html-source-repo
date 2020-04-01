@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	var jquery = jQuery.noConflict();
+</script>
+
+<script type="text/javascript">
+//★★★★★★★★★★★★★★★★★★★★★★★
+//$나 jquery를 시작할때 기호가 충돌이 안나도록 해준다 jQuery.noConflick()
+	var j1 = jQuery.noConflict();  
+//★★★★★★★★★★★★★★★★★★★★★★★
+</script>
+<style>
+	.high-light{background:yellow;}
+	.high-light-0{background:blue;}
+	.high-light-1{background:green;}
+	.high-light-2{background:orange;}
+	.high-light-3{background:brown;}
+	.high-light-4{background:aqua;}
+	.high-light-5{background:tomato;}
+		
+	
+</style>
+</head>
+<body>
+<h1>item - 0</h1>
+<h1>item - 1</h1>
+<h1>item - 2</h1>
+<h1>item - 3</h1>
+<h1>item - 4</h1>
+<h1>item - 5</h1>
+<input type="text" value="tomato" id="abc">
+<script type="text/javascript">
+	j1(document).ready(function(){
+		 //$("h1").addClass('high-light');
+		 j1("h1").each(function(index,item){
+			$(this).addClass('high-light-'+index); 
+		 });
+	});
+	
+	
+</script>
+<script type="text/javascript">
+	alert(j1('#abc').val());
+</script>
+</body>
+</html>

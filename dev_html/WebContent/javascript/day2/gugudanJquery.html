@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript" src="https://code.jquery.com\jquery-3.4.1.min.js"></script>
+	<script type="text/javascript">
+		function gugudan(pstart,pend){
+			document.write(pstart+", "+pend);
+			
+		
+			
+			
+			
+			
+			
+			
+			document.write("<table border='1px' width=450px'>")
+			for(var i=0; i<3;i++){
+			document.write("<tr><td>&nbsp;</td></tr>")
+			}
+			document.write("</table>")
+		}
+	
+	</script>
+
+</head>
+<body>
+	<!--
+		document내장객체는 tableTest.html을 가리킨다.
+		자바 코드 영역
+		자바스크립트 코드 영역
+		CSS 코드 영역
+		HTML코드 영역 
+	  -->
+	  <form id="f_gugudan">
+	<label>시작 단수 :</label> 
+	 <input type="text" id="startdan">
+	<label>끝 단수 : </label>
+	<input type="text" id="enddan">
+
+	<button onclick="javascript:gugudan($('#startdan').val(),$('#enddan').val())">시작!</button>
+	<!--javascript:account(document.getElementById('f_gugudan').txtStart.value -->
+	</form>
+
+
+
+</body>
+</html>
