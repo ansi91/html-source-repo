@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<!--
+	html->javascript
+
+	javascript->jquery,vue, react... 표준은 아니다
+	만일 저 중에 지원을 안하는 부분이 있을 때, 버그가 있는 경우에는 표준이 답이다.
+  -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function check(p_input){
+	
+		
+		if(p_input.value.length>4){
+			alert("4자리까지만 입력해주세요");
+			p_input.value="";
+		}
+		/* else{
+			document.write("<h1>환영합니다.</h1>")
+		} */
+	}
+	
+	function check2(sel){
+		alert("당신은 선택한 메뉴는 " + sel.value);
+	}
+
+</script>
+</head>
+<body>
+<!-- 
+	select, text, textarea등에서 객체의 내용을 변경한 후 포커스를 잃을때 호출된다.
+	
+
+ -->
+ <select id="menu" name="menu" onchange="check2(this)">
+ 	<option value="김밥">김밥</option>
+ 	<option value="떡볶이">떡볶이</option>
+ 	<option value="돈까스">돈까스</option>
+ 	<option value="냉면">냉면</option>
+ 	<option value="된장찌개">된장찌개</option>
+ </select>
+ <form id="f_login">																	<!--onChange=  -->
+ <input type="text" size="20" id="mem_name" name="mem_name" onKeyup="check(this)">
+ 
+ <button onclick="javascript:document.getElementById('f_login').submit();">로그인</button>
+ </form>
+</body>
+</html>

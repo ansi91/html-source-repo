@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div#d_result{position:absolute;}
+	.listIn{background:#CCFFFF;}
+	.listOut{background:#FFFFFF;}
+						
+	
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
+<script>
+//<![CDATA[
+
+$(function() {
+
+    var lunch = ["햄버거","순대국","김치찌개","돈까스","김밥"];
+
+    $("#lunch").autocomplete({
+
+        source: lunch,
+
+        select: function(event, ui) {
+
+            alert(ui.item.value);
+
+        },
+
+        focus: function(event, ui) {
+
+            return false;
+
+            //event.preventDefault();
+
+        }
+
+    });
+
+});
+
+//]]>
+
+
+
+
+</script>
+
+
+<script type="text/javascript">
+	function account(){
+		
+	}
+</script>
+</head>
+<body>
+<div class="ui-widget">
+
+  <label for="lunch">점심메뉴: </label>
+
+  <input id="lunch">
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
