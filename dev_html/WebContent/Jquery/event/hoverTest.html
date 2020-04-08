@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>hover</title>
+<style type="text/css">
+	.reverse{
+			background:black;
+			color:white;
+		
+	}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js">
+
+</script>
+</head>
+<body>
+	<h1 id="h100">수요일</h1>
+	<h1>목요일 </h1>
+	<h1>금요일</h1>
+	<!--DOM 구성이 완료 되었을 때 (h1태그가 인지된 후)  -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//이벤트 연결
+			$('h1').hover(function(){
+				$(this).addClass('reverse');
+			
+			}, function(){
+				$(this).removeClass('reverse');
+			});
+			
+		});
+	</script>
+	
+</body>
+</html>

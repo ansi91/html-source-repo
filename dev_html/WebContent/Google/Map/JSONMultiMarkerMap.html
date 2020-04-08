@@ -13,35 +13,42 @@
 	<script type="text/javascript">
 		var map = new google.maps.Map(document.getElementById('d_map'),{
 				zoom:14
-				,center: new google.maps.LatLng(37.478637,126.878694)
-				,mapTypeId : google.maps.MapTypeId.ROADMAP
+				,center: new google.maps.LatLng(37.478637,126.878694) //맵 위치 생성
+				,mapTypeId : google.maps.MapTypeId.ROADMAP 			   // 맵 유형 로드맵||위성지도
 			});
-		var infowindow = new google.maps.InfoWindow();
-		var marker; //마커가 5개
-		var i; //마커 생성시 부여한 인덱스 값
+		var infowindow = new google.maps.InfoWindow(); //보안때문에 패키지 사용  => 말풍선을 클릭했을 때 열리는 창
+		var marker; //마커가 5개(JSON으로 스캔 - jsonMapList.jsp)
+		var i; //마커 생성시 부여한 인덱스 값	0~4
+		//ajax 비동기 통신 객체 ->★★★통신 ->요청->응답 ->주문 ->결제 ->배송 
 		$.ajax({
 			url:'jsonMapList.jsp'
 			,dataType: 'json'
-			,success:function(data){
-				/* $("#d_map").text(data); */
-				var result = JSON.stringify(data);
-				var jsonDoc = JSON.parse(result);
+			,success:function(data){ //익명 함수 한번만 사용 하려고 
+				/* $("#d_map").text(data); [object Object]*/
+				var result = JSON.stringify(data); //직관적인 정보로 변환(구조체 - 덩어리) JSON객체 안에서 제공되는 함수
+				var jsonDoc = JSON.parse(result);//배열로 변환 -다시 객체화 처리됨
 				for(var i=0; i<jsonDoc.length;i++){
 						marker = new google.maps.Marker({
-						   	id:i
-							,position : new google.maps.LatLng(jsonDoc[i].lat, jsonDoc[i].lng)
-							,map: map
-							,title: jsonDoc[i].res_name
+						   	 id:i
+							,position : new google.maps.LatLng(jsonDoc[i].lat, jsonDoc[i].lng) //포지션값도 배열로 변경됨
+							,map: map //지도는 하나
+							,title: jsonDoc[i].res_name                    //배열.속성이름으로 꺼낸다
+																					 	//JSON이기 때문에  마커가 5개이므로 식당이름 5개 분류
+																												 	
+																												 	
 						});
+						//마커 5개가 for문 안에서 객체 생성되니까 이벤트도 안에서 건다
 						google.maps.event.addListener(marker, 'click',(function(marker,i){
-							return function(){
-								infowindow.setContent('<b>' + jsonDoc[i].res_name+'</b>');
+							//addListener 함수의 리턴값이 변수가 아님 함수임
+							return function(){ // 함수의 결과는 윈도우창을 열어줌(click된 마커마다 다르게)
+								infowindow.setContent('<b>' + jsonDoc[i].res_name+'</b><br><img src='+jsonDoc[i].res_photo+' width="200px" height="150px" >');
 								infowindow.open(map,marker);
 							}//end of 반환 함수
 						})(marker,i));
+						//마커를 생성 했을때 click 이벤트 처리하기
 						if(marker){ //자바스크립트에서는 0이 아니면 모두 true
 							marker.addListener('click',function(){
-								map.setZoom(15);
+								map.setZoom(16); //상세보기 처리 (14->15)
 								map.setCenter(this.getPosition());
 							});
 						}

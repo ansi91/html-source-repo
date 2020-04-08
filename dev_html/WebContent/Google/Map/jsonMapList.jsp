@@ -10,6 +10,7 @@ pageEncoding="UTF-8"%>
 		List<Map<String,Object>> mrList = rDao.mapRestList();
 		Gson g = new Gson();
 		String imsi = g.toJson(mrList);
+	//	out.print(mrList); <- JSON 형식이 아님
 		out.print(imsi);
 
 %>

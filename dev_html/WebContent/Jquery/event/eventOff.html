@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>해당 문서 객체와 관련된 모든 이벤트 제거하기</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('h1').dblclick(function(){
+			alert("더블클릭이벤트 성공");
+		});
+		
+		$('h1').click(function(){
+			$(this).html('클릭');
+				alert('클릭이벤트 성공');
+			 $(this).off('click'); // 해당 문서 객체와 관련된 모든 이벤트 제거
+			 
+		});//end of click
+	});
+</script>	
+</body>
+</html>
