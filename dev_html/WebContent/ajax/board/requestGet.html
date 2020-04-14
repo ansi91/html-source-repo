@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	var xhrObject = null;
+	function createRequest() {
+		try {
+			xhrObject = new XMLHttpRequest();
+		 }catch (trymicrosoft) {
+			try {
+				xhrObject = new ActiveObject('Msxml2.XMLHTTP');
+			}catch (e) {
+				xhrObject = null;
+			}
+		}
+		if (xhrObject == null) {
+			alert('비동기통신 객체 생성 에러.')
+		}
+	}
+	
+	function startMethod(){
+		createRequest(); //비동기 통신 객체 생성
+		xhrObject.open('GET', 'requestGet.xml', true); //통신전에 필요한 상수값을 지정
+		xhrObject.onreadystatechange=result_process;
+		xhrObject.send(null);//전송 처리
+	}
+	function result_process(){
+		if(xhrObject.readyState==4){
+			if(xhrObject.status==200){
+				//document.getElementById("d_xml").innerText = xhrObject.responseXML;
+				document.getElementById("d_xml").innerHTML = xhrObject.responseText;
+			}
+		}
+	}
+	
+</script>
+</head>
+<body>
+<div id="d_xml"></div>
+<button onclick="startMethod()">클릭</button>
+</body>
+</html>

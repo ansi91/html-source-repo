@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	table{	border:1px solid black;	}
+	th,td{border:1px dotted black; width:150px; }
+	td{text-align:right;}
+	th {background:#fc6262;}	
+</style>
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	function account(){
+		$.ajax({
+			url:"Chicken.jsp"
+			,method:"get"
+			,dataType:"text"
+			,success:function(data){
+			var fried_qty = $('#friedQty').text();
+			var fried_price  = $('#fried').text();
+			var sale_fried = fried_qty * fried_price;
+			
+			var seasoning_qty = $('#seasoningQty').text();
+			var seasoning_price  = $('#seasoning').text();
+			var sale_seasoning = seasoning_qty * seasoning_price;
+			
+			var potato_qty = $('#potatoQty').text();
+			var potato_price  = $('#potato').text();
+			var sale_potato = potato_qty * potato_price;
+			var result = sale_fried + sale_seasoning + sale_potato;
+			$('#cash').text(result);
+			}
+			,error:function(e){
+				alert("에러 발생");
+			}
+		});
+	}
+	function clearText(el){
+		if(el != null){
+			if(el.childNodes){
+				for(var i= 0; i < el.childNodes.length; i++){
+					var childNode = el.childNodes[i];
+					el.removeChild(childNode);
+				}
+			}
+		}
+	}
+</script>
+
+</head>
+<body>
+<center>
+<h2>치킨 판매 정산</h2>
+<table>
+	<tr>
+		<th>메뉴</th>
+		<td>판매 가격</td>
+		 <td>판매 수량</td>
+	</tr>
+	
+	
+	<tr>
+		<th>후라이드 치킨</th>
+		<td><span id="fried">10000</span></td>
+		 <td><span id="friedQty">10</span></td>
+	</tr>
+	<tr>
+		<th>양념치킨</th>
+		<td><span id="seasoning">11000</span></td>
+		 <td><span id="seasoningQty">20</span></td>
+	</tr>
+	<tr>
+		<th>감자튀김</th>
+		<td><span id="potato">8000</span></td>
+		<td><span id="potatoQty">7</span></td>
+	</tr>
+</table>
+<h2>마진금액 : <span id='cash'>0</span>원</h2>
+<button onclick="account()">정산하기</button>
+</center>
+</body>
+</html>

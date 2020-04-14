@@ -42,6 +42,7 @@ public class MemberDAO {
 				rMap.put("mem_no", rs.getInt("mem_no"));
 				rMap.put("mem_id",rs.getString("mem_id"));
 				rMap.put("mem_pw", rs.getString("mem_pw"));
+				rMap.put("mem_name", rs.getString("mem_name"));
 				rMap.put("zipcode",rs.getString("zipcode"));
 				rMap.put("mem_addr",rs.getString("mem_addr"));
 				rMap.put("mem_email",rs.getString("mem_email"));
@@ -80,6 +81,7 @@ public class MemberDAO {
 				rmap.put("mem_no",rs.getInt("mem_no"));
 				rmap.put("mem_id",rs.getString("mem_id"));
 				rmap.put("mem_pw", rs.getString("mem_pw"));
+				rmap.put("mem_name", rs.getString("mem_name"));
 				rmap.put("zipcode",rs.getString("zipcode"));
 				rmap.put("mem_addr",rs.getString("mem_addr"));
 				rmap.put("mem_email",rs.getString("mem_email"));

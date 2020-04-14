@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<link rel="stylesheet" type="text/css" href="http://192.168.0.7:8000/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://192.168.0.7:8000/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://192.168.0.7:8000/demo/demo.css">
+    <script type="text/javascript" src="http://192.168.0.7:8000/js/jquery.min.js"></script>
+    <script type="text/javascript" src="http://192.168.0.7:8000/js/jquery.easyui.min.js"></script>
+    
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!--
+		오라클 서버와 연동 -select문 처리 
+		js이용해서 태그를 접근하거나 조작할 수 있다.
+		easyUI는 어떻게 태그를 접근하고 이벤트 처리하는지 관찰하기.	
+		easyUI API활용능력 키우기
+ -->
+</head>
+<body>
+	<table id="dg_dept" width="500px" height="400px" class="easyui-datagrid">
+	</table>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#dg_dept').datagrid({
+		 url:'memberList.jsp',
+		 title:'부서관리',
+		 
+		  columns:[[
+		        {field:'mem_no',title:'번호',width:166,align:"center"},
+		        {field:'mem_id',title:'아이디',width:166,align:"center"},
+		        {field:'mem_name',title:'이름',width:166,align:"center"},
+		        {field:'mem_email',title:'이메일',width:166,align:"center"},
+		        
+		        
+		 
+		    ]],
+		    
+		    	onDblClickRow: function(index,row){
+		    		alert(row.dname+", " + row.loc+" , index: " + index);
+		    		//페이지 이동처리 할 때 get 방식 location도 내장객체이다.
+		    		location.href="fetchTest.html";
+		    	}
+		 
+	});
+});
+</script>
+</body>
+</html>

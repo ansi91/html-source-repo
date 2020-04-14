@@ -21,7 +21,7 @@
 			//$("#f_login").attr("action","loginAction.jsp");//자바코드를 사용함.
 			//$("#f_login").submit();
 			fetch("loginAction.jsp?mem_id="+u_id+"&mem_pw="+u_pw,{
-				method: "POST"
+				method: "GET"
 //			}).then(res => res.text()).then(res => console.log(res));
 //			}).then(res => res.text()).then(res => alert(res.text()));
 			}).then(res => res.text()).then(function(text){
