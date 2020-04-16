@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"> </script>
+</head>
+<body>
+<div id="d_info"> </div>
+<script type="text/javascript"> 
+//ready함수를 사용하지 않고 있다.
+//ready함수를 사용 할때와 사용하지 않았을때 차이점에 대해 말할 수 있다. 
+//dom tree가 구성 돼었을 때 전체를 스캔하게 되는데 시간적 차이가 맞지 않는 걸 피할 수 있다
+	
+	$.ajax({
+		method:"get" //"post" => data 속성 같이 사용함 / 전송방식(사용자가 서버에게 -요청 // 서버가 사용자가에게 - 응답)
+		,url:'customerInfo.jsp'
+		,dataType:'json'
+		,success:function(result){
+			alert(result);
+			//fetch함수로 처리시에는 result.trim()반드시 해서 공백문자를 제거한다.
+			var res = JSON.stringify(result);
+			//$('#d_info').text(res);
+			var resDoc = JSON.parse(res); // 배열로 전환
+			
+			for (var i=0; i < resDoc.length; i++){
+				alert(resDoc[i].tel);
+					if("010-7777-7777"==resDoc[i].tel){
+						alert(resDoc[i].address);
+					}
+			}
+			
+		}
+	});
+
+</script>
+</body>
+</html>

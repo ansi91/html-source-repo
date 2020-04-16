@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<style>
+	table{border:1px solid black;}
+	td{border:1px dashed black;}
+</style>
+<script type="text/javascript">
+
+	function test(){
+	//	alert("안녕하세요");
+		$('#secret').show();
+	}
+	
+	function out(){
+		
+		$('#secret').hide();
+	}
+	
+</script>
+</head>
+<body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#secret').hide();
+});
+</script>
+<center>
+<h1>그림 목록</h1>
+<table>
+	<tr>
+		<td><img src="picture1.jpg"/></td><td onmouseover="test()" ><span id="picture1" >그림1</span> </td>
+		<td id="secret" onmouseout="out()"><img src="picture1.jpg" width="500px" height="500px"><p>"2020-04-16 북한산에 올라가서 그린 그림"</p></td>
+		
+	</tr>
+	<tr>
+		<td><img src="picture2.jpg"/></td><td> <span>그림2</span></td>
+	</tr>
+	<tr>
+		<td><img src="picture3.jpg"/></td><td> <span>그림3</span></td>
+	</tr>
+</table>
+</center>
+</body>
+</html>

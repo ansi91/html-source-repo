@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<!--
+	get방식 : 노출 -queryString 주소창에 노출
+				  전송시 헤더영역에 값이 전달됨.
+				  전송크기에 제한이 있다(브라우저마다 다름. 256kb
+				  url에 직접 작성해서 요청을 전송할 수 있다.
+				  a.jsp?mem_id=test&mem_pw=123
+				  location.href="c.jsp?mem_id=tomato";
+				  ajax({url : 'a.jsp'});
+				  respose.sendRedirect("b.jsp"); // get방식
+				  
+				  
+	post방식: 노출 없다, 전송크기에 제한이 없다.
+				  단위 테스트를 할 수 없다.
+				  자바스크립트의 도움이 있어야만 전송이 가능하다
+				  url에 직접 작성하는 것은 모두가 get방식이다. <for method="post"> || $('f_login).attr(method,"post");
+  -->
+<head>
+<meta charset="UTF-8">
+<title>그림 소개</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<link rel="stylesheet" type="text/css" href="pictureMain.css">
+
+<script type="text/javascript">
+	function startMethod(td){
+		/* $('#d_detail').attr("left",150+"px");
+		$('#d_detail').attr("top",150+"px"); */
+		//alert(td);
+		var u_pic = $(td).attr("id");//attribute, 속성이름이 id
+	//	alert("사용자가 마우스 오버한 그림" + u_pic); 
+		$.ajax({
+			method:"post"
+			,url:"pictureInfo.jsp"
+			,data:"id="+u_pic
+//			,url:"pictureInfo.jsp?id="+u_pic+"&timestamp="+new Date().getTime();
+			,success:function(result){
+				//alert(result);
+								
+			//$('#d_detail').css("left",$(td).offset().left+125+"px");
+			$('#d_detail').css("left",td.offsetLeft+125+"px");
+			$('#d_detail').css("top",td.offsetTop+"px");
+			$('#d_detail').html(result);
+			}
+		});
+		
+	}
+	
+	function clearMethod(){
+		$('#d_detail').html("");
+	}
+</script>
+</head>
+<body>
+<div id="d_detail">여기</div>
+	
+	
+
+<table>
+	<thead>
+		<th colspan="2">그림 목록</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td align="center"><img src="1.jpg" width="150px" height="150px"/></td>
+			<td id="1.jpg" onmouseover="startMethod(this)" onmouseout="clearMethod()">포르쉐 파나메라</td> <!--this는 td를 가리킨다   -->
+		</tr>
+			<tr>
+			<td align="center"><img src="2.jpg" width="150px" height="150px"/></td>
+			<td id="2.jpg"onmouseover="startMethod(this)" onmouseout="clearMethod()">gv80</td>
+		</tr>
+			<tr>
+			<td align="center"><img src="3.jpg" width="150px" height="150px"/></td>
+			<td id="3.jpg" onmouseover="startMethod(this)" onmouseout="clearMethod()">람보르기니 우라칸</td>
+		</tr>
+	</tbody>
+</table>
+
+</body>
+</html>

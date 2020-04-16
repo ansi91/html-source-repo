@@ -1,0 +1,10 @@
+@charset "UTF-8";
+#d_detail{
+	position: absolute;
+	
+}
+table {
+	width: 350px; height: 100px;
+	border: 1px dashed black;
+	margin: 10px; padding: 20px;
+}
