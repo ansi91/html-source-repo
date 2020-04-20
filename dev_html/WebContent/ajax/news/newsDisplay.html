@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"> </script>
+<script type="text/javascript">
+ 	 var x=1;
+	function autoLoad(){
+		//alert("오토로드 호출 성공"+ x++);
+		$.ajax({
+			method:"get"
+			,url:"newsData.jsp"
+			,dataType:"text"
+			,success:function(result){
+				$('#d_news').html(result);
+			}
+			,failed:function(xhrObject, textStatus){
+				alert(xhrObject.responseText+", " + textStatus)
+			}
+		});
+	}
+</script>
+<style>
+	table{
+				border:3px solid black;
+				width: 600px;
+				height:30px;
+	}
+</style>
+</head>
+<body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			function start(){
+				autoLoad();
+				setInterval(autoLoad, 3000);//3초마다 autoLoad함수 호출 
+			}
+			start();
+		});
+	</script>
+<h3>헤드라인 뉴스</h3>
+<div id="d_news">뉴스 준비중..... </div>
+
+</body>
+</html>

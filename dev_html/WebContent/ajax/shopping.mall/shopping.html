@@ -6,11 +6,18 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Zoom img on hover / mouse move</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./main1.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
     	#menubar{background:#34343c; color:white; padding:20px;}
+    	.target{float:left; margin-left:50px;}
+    	#banana{width:500px; height:500px;float:left;margin-left:50px;}
     </style>
+    <script type="text/javascript">
+    	function startMethod(div){
+    		
+    	}
+    </script>
 </head>
 
 <body>
@@ -29,8 +36,10 @@
     			<li>공식 스토어</li>
     		</ul>
     	</div>	
-        <h2>마우스를 올려보세요.</h2>
         <div class="target" data-scale="2" data-image="banana.jpg"></div>
+      <!-- <div id="banana.jpg" onmouseover="startMethod(this)"><img src="banana.jpg" width=500px; height="500px" /></div> -->
+      
+      
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

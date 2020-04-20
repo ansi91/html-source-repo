@@ -11,6 +11,7 @@ public class Equals {
 		
 		System.out.println(result);
 		System.out.println(res);
+
 	}
 
 }
