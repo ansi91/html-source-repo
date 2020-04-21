@@ -1,5 +1,5 @@
 [
-{"ck": 0,"name": "Java"}
-,{"ck": 1,"name": "Perl"}
-,{"ck": 0,"name": "Ruby"}
+{"ck": false,"name": "Java"}
+,{"ck": true,"name": "Perl"}
+,{"ck": false,"name": "Ruby"}
 ]
