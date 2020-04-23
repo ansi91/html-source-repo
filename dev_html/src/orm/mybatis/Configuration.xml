@@ -2,6 +2,7 @@
 <!DOCTYPE configuration
  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
 <configuration>
 	<environments default="development">
 		<environment id="development">
@@ -17,9 +18,13 @@
 	<mappers>
 	<!-- xml주석
 	DML구문 즉 select, insert, update, delete문이 작성된 xml 파일에 물리적인 위치와 파일명을 등록하기
-	
+		1) sqlSession을 인스턴스화 하는 변수는 sqlMapper이다
+			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+		2) Configuration.xml은 무엇일까? ->DB를 연결하는 오라클 드라이버와 ip,port번호 scott,tiger가 있다
+		3)reader는 configuration을 스캔한다 ip, port번호 user id pw....	
 	 -->
 		<mapper resource="orm/mybatis/mapper/emp.xml" />
 		<mapper resource="orm/mybatis/mapper/dept.xml" />
+	 	<mapper resource="orm/mybatis/mapper/book.xml" />
 	</mappers>
 </configuration>

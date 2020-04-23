@@ -35,38 +35,7 @@
     
 </head>
 <body>
-	<table id="dg_emp"></table>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#dg_emp').datagrid({
-				title:"자바스크립트만으로 구성"
-				,url:'jsonEmpList.jsp'
-				,method:'get'
-					  ,columns:[[
-					        {field:'EMPNO',title:'사원번호',width:100}
-					        ,{field:'ENAME',title:'사원이름',width:100}
-					        ,{field:'SAL',title:'급여',width:100,align:'right'}
-					        ,{field:'DEPTNO',title:'부서번호',width:100,align:'center'}
-					    ]],
-						toolbar: [{
-							iconCls: 'icon-search'
-							,text:'사원조회'
-							,handler: function(){empList()}
-						},'-',{
-							iconCls: 'icon-add'
-							,text:'사원등록'
-							,handler: function(){empIns()}
-						},'-',{
-							iconCls: 'icon-edit'
-							,text:'사원수정'
-							,handler: function(){empUdp()}
-						},'-',{
-							iconCls: 'icon-remove'
-							,text:'사원삭제'
-							,handler: function(){empDel()}
-						}]
-			});
-		});
-	</script>
+	<div id="d_emp1"></div>
+	<div id="d_emp2"></div>
 </body>
 </html>

@@ -10,9 +10,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 
-
-
-
 public class SqlMapEmpDao {
 	Logger logger = Logger.getLogger(SqlMapEmpDao.class); 
 	SqlSessionFactory sqlMapper = null;
