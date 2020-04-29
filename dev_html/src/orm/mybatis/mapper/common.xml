@@ -20,9 +20,23 @@
 	<select id="getDONGList" parameterType="map" resultType="map">
 		 SELECT distinct(dong) dong FROM zipcode_t
 		 <where>
-		 		sigu LIKE '%'||?||'%'
-		 </where>
+		 		<if test="zdo!=null">
+		  		AND zdo = #{zdo}
+		  	</if>
+		  	<if test="sigu!=null">
+		  		AND sigu LIKE #{sigu}||'%'
+		  	</if>
+		  </where>
 	</select>
-
+	
+	<select id="zipcodeList" parameterType="map" resultType="map">
+		SELECT zipcode,address FROM zipcode_t
+		<!--동적쿼리문을 지원한다  -->
+		<where>
+		<if test="dong !=null">
+			AND	dong LIKE #{dong}||'%'
+		</if>
+		</where>
+	</select>
 
 </mapper>

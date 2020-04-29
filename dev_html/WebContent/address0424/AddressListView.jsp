@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="orm.dao.SqlMapCommonDao"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
@@ -7,7 +8,9 @@
  <%
  	List<Map<String,Object>> zdoList= null;
  	SqlMapCommonDao smcd = new SqlMapCommonDao();
- 	zdoList = smcd.getZDOList(null);
+ 	zdoList = smcd.getZDOList(new HashMap<>());
+ 	
+ 	
  %>   
     
 <!DOCTYPE html>
@@ -23,22 +26,13 @@
 	
 </style>
 <script type="text/javascript">
-	function siguIn(){
-		$('#i_sigu').change(function(){
-			$('#i_sigu option:selected').each(function(){
-				$('#sigu').val($(this).text());
-			});
-		});
-	}
-</script>
-</head>
-<body>
-<script type="text/javascript">
-	$(document).ready(function(){
+	function zdoIn(){
 		$('#i_zdo').change(function(){
 			$('#i_zdo option:selected').each(function(){
 				var p_zdo = $(this).text();
 				$('#zdo').val(p_zdo);
+				$('#sigu').val('');
+				$('#dong').val('');
 				var param="zdo="+p_zdo;
 				$.ajax({
 					method:"get"
@@ -50,6 +44,35 @@
 				});
 			});
 		});
+	}
+	function siguIn(){
+		$('#i_sigu').change(function(){
+			$('#i_sigu option:selected').each(function(){
+				$('#sigu').val($(this).text());
+				$('#dong').val('');
+				var sigu = $("#sigu").val();
+				$.ajax({
+					url:'getDongList.jsp?sigu='+sigu
+					,method : "get"
+					,success : function(result){
+						 $("#d_dong").html(result);
+						 dongIn();
+					}
+				})
+			});
+		});
+	}
+	function dongIn(){
+		$('#i_dong').change(function(){
+			$('#dong').val($(this).val());
+		});
+	}
+</script>
+</head>
+<body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		zdoIn();
 	});
 
 </script>
@@ -58,6 +81,7 @@
 		<td width="30px"><label>시도</label> </td>
 		<td width="100px">
 			<select id="i_zdo" width="100px">
+			<option value="선택">선택</option>
 <%
 	for(int i=0; i<zdoList.size();i++){
 		Map<String,Object> rmap = zdoList.get(i);
@@ -73,7 +97,7 @@
 		<td width="100px" id="d_sigu">
 			
 		<td width="30px"><label>동</label>		
-		<td width="100px" >
+		<td width="100px" id="d_dong">
 			
 		</td>
 	</tr>	

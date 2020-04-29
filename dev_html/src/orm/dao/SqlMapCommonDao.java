@@ -23,8 +23,9 @@ public class SqlMapCommonDao {
 	 * 2020 04월 24일        작성자 : 강감찬
 	 ****************************************/
 	public List<Map<String,Object>> getZDOList(Map<String,Object> pmap){
-		logger.info("getZDOList 호출 성공");
-List<Map<String,Object>> zdolist = new ArrayList<Map<String,Object>>();
+		logger.info("getZDOList 호출 성공" + pmap.size());
+
+		List<Map<String,Object>> zdolist = new ArrayList<Map<String,Object>>();
 		
 		String resource = "orm/mybatis/Configuration.xml";
 		try {
@@ -75,7 +76,39 @@ List<Map<String,Object>> zdolist = new ArrayList<Map<String,Object>>();
 	public List<Map<String,Object>> getDONGList(Map<String,Object> pmap){
 		logger.info("getDONGList 호출 성공");
 		List<Map<String,Object>> donglist = new ArrayList<>();
+		String resource = "orm/mybatis/Configuration.xml";
+		try {
+			Reader reader = Resources.getResourceAsReader(resource);
+			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+			//sql문을 요청하기 위한 SqlSession객체 생성하기
+			SqlSession sqlSes = sqlMapper.openSession();
+			donglist = sqlSes.selectList("getDONGList",pmap);
+			System.out.println("조회한 row 수" + donglist.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return donglist;
 		
 	}
+	
+	
+	
+	public List<Map<String,Object>> getZIPCODEList(Map<String,Object> pmap){
+		logger.info("getZIPCODEList 호출 성공");
+		List<Map<String,Object>> zipcodelist = new ArrayList<Map<String,Object>>();
+		
+		String resource = "orm/mybatis/Configuration.xml";
+		try {
+			Reader reader = Resources.getResourceAsReader(resource);
+			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+			//sql문을 요청하기 위한 SqlSession객체 생성하기
+			SqlSession sqlSes = sqlMapper.openSession();
+			zipcodelist = sqlSes.selectList("zipcodeList",pmap);
+			System.out.println("조회한 row 수" + zipcodelist.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return zipcodelist;
+	}
+	
 }
