@@ -41,12 +41,11 @@
 	pmap.put("empno", empno);
 	pmap.put("ename", ename);
 	pmap.put("job", job);
-	pmap.put("mgr", mgr);
 	pmap.put("hiredate", hiredate);
 	pmap.put("sal", sal);
 	pmap.put("comm", comm);
 	pmap.put("deptno", deptno);
-	result=eDao.empINS(pmap); //jsp -> Dao -> mybatis -> oracle로 가는 갈림길
+	result=eDao.empUPD(pmap); //jsp -> Dao -> mybatis -> oracle로 가는 갈림길
 	out.print("result"+result);
 	
 	if(result==1){ //등록 성공 했을때

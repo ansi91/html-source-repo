@@ -33,6 +33,57 @@ public class SqlMapEmpDao {
 		}
 		return result;
 	}
+	
+	//사원 수정 구현하기
+	public int empUPD(Map<String,Object> pmap) {
+		int result =0;
+		logger.info("empUPD호출");
+		try {
+			
+			Reader reader = Resources.getResourceAsReader(resource);
+			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+			//sql문을 요청하기 위한 SqlSession객체 생성하기
+			SqlSession sqlSes = sqlMapper.openSession();
+			result = sqlSes.update("empUPD",pmap);
+			sqlSes.commit();
+			logger.info("result" + result); //excuteUpdate():int
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	/*************************************************
+	 * 
+	 * sql문 DELETE FROM 테이블명 WHERE 컬럼명 IN(값)
+	 * @return : int 
+	 ***********************************************/
+	
+	
+	//사원 삭제 구현하기
+	public int empDEL(String empnos[]) {
+		int result =0;
+		logger.info("empDEL호출");
+		try {
+			
+			Reader reader = Resources.getResourceAsReader(resource);
+			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+			//sql문을 요청하기 위한 SqlSession객체 생성하기
+			SqlSession sqlSes = sqlMapper.openSession();
+			List<Integer> elist = new ArrayList<Integer>();
+			for(int i=0; i<empnos.length;i++) {
+				elist.add(Integer.parseInt(empnos[i]));
+			}
+			result = sqlSes.delete("empDEL",elist);
+			sqlSes.commit();
+			logger.info("result" + result); //excuteUpdate():int
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
 	public List<Map<String,Object>> empList(Map<String,Object> pmap){
 		logger.info("empList 호출성공");
 
@@ -60,11 +111,11 @@ public class SqlMapEmpDao {
 	
 	public static void main(String[] args) {
 		SqlMapEmpDao smed = new SqlMapEmpDao();
-		smed.empList(null);
+		//smed.empList(null);
 		Map<String,Object> pmap = new HashMap<>();
 //		pmap.put("empno", 9009);
-//		int result = smed.empINS(pmap);
-//		System.out.println(result);
+		int result = smed.empUPD(pmap);
+		System.out.println(result);
 		
 		
 		//sqlSes.commit(open);

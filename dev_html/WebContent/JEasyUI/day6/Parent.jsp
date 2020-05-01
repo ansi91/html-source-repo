@@ -30,7 +30,7 @@
 		$('#dg').datagrid({
 			url:'../day5/jsonEmpList.jsp'
 			,onLoadSuccess:function(data){
-					alert('emp 목록 호출 성공');
+					//alert('emp 목록 호출 성공');
 			}
 		});
 	}

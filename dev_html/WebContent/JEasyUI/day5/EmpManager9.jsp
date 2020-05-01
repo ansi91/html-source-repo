@@ -1,35 +1,74 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사원관리 - [jEasyUI활용]</title>
+<title>사원관리 - [수정 구현]</title>
 <%@ include file="./JeasyUICommon.jsp" %>
+<script type="text/javascript src="http://code.jquery.com/jquery-3.4.1.js"></script>
 	<script type="text/javascript">
 		//여기가 전변자리이다.
 		var g_address='';//사용자가 선택한 주소정보 담기
+		var g_cnt =0; //수정시 한 건만 선택되었는지 체크함.
 		var g_empno=0;
 		var g_ename=0;
 		var g_job='';
 		var g_hiredate='';
-		var g_comm =0;
 		var g_deptno ='';
+		var g_total=0;
+		//등록화면 열기
 		function empINS(){
 			//insert here
 			$("#dlg_ins").dialog('open');
+			empList();
 		}
+		
+		//등록화면 닫기
+		
+		//수정화면 열기
 		function empUPD(){
 			//insert here
+			if(g_cnt>1){
+				$.messager.alert('Info','한번에 한건만 수정할 수 있습니다');
+				return; 
+			}
+			 if(g_empno==0){
+				$.messager.alert('Info','수정할 사원을 입력해주세요.');
+				empList();
+				return;
+			}else{
+				$.ajax({
+					url:'jsonEmpList.jsp?empno='+g_empno
+							,dataType:'json'
+							,success:function(data){ // 조회결과는 파라미터 data로 가져온다
+									var result = JSON.stringify(data);
+									var arr 	    =  JSON.parse(result);
+									for(var i=0; i<arr.length; i++){
+										//mybatis에서 커서를 이용해서 꺼낸 값을 디폴트를 대문자로 바꿔준다;
+										 $('#u_empno').numberbox('setValue',arr[i].EMPNO);
+										$('#u_ename').textbox('setValue',arr[i].ENAME);
+										$('#u_job').textbox('setValue',arr[i].JOB);
+										$('#u_hiredate').textbox('setValue',arr[i].HIREDATE);
+										$('#u_sal').numberbox('setValue',arr[i].SAL); 	
+										$('#u_comm').numberbox('setValue',arr[i].COMM); 
+										$('#u_deptno').combobox('setValue',arr[i].DEPTNO);
+									}
+							}
+				});
+			}
+			
+			$("#dlg_upd").css('background-color','MistyRose');
 			$("#dlg_upd").dialog('open');
-			alert(g_empno+','+g_ename+','+g_job);
-			$('#u_empno').textbox('setValue',g_empno);
+			
+		/* 	 $('#u_empno').numberbox('setValue',g_empno);
 			$('#u_ename').textbox('setValue',g_ename);
 			$('#u_job').textbox('setValue',g_job);
 			$('#u_hiredate').textbox('setValue',g_hiredate);
-			$('#u_sal').textbox('setValue',g_sal);
-			$('#u_comm').textbox('setValue',g_comm);
+			$('#u_sal').numberbox('setValue',g_sal); */
 		}
+		
+		//수정화면 닫기
 		function empnoSearch(){
 			//alert("empnoSearch 호출");
 			var s_empno = $("#s_empno").val();
@@ -38,11 +77,13 @@
 			});
 		}
 		function empList(){
+			g_cnt = 0;
 		   $("#dg_emp").datagrid({
 				url:"jsonEmpList.jsp"
 			   ,onLoadSuccess: function(data){
 				    var result = JSON.stringify(data);
-					alert("새로고침 처리 성공 : "+data+","+result);
+					//alert("새로고침 처리 성공 : "+data+","+result);
+				
 				}			   
 		   });
 		}//end of empList	
@@ -91,14 +132,34 @@
 			$("#f_ins").attr("method","get");
 			$("#f_ins").attr("action","empInsert.jsp");
 			$("#f_ins").submit();
+			
+			
 		}
 		//사원정보 수정 처리
 		function emp_upd(){
+			
 			//alert("수정 저장 호출");
 			$("#f_upd").attr("method","get");
 			$("#f_upd").attr("action","empUpdate.jsp");
 			$("#f_upd").submit();
 		}
+		
+		//사원정보 삭제 처리
+		function emp_del(){
+			var empnos = [];
+			var rows = $('#dg_emp').datagrid('getSelections');
+			for(var i=0; i<rows.length; i++){
+			    empnos.push(rows[i].EMPNO);
+			}
+			//alert(empnos.join(','));
+			pempno = empnos.join(',');
+			$.messager.progress(); //막대기 바 0%~100% 
+			if(empnos.length>0){
+				location.href="empDelete.jsp?empno="+pempno;
+			}
+			$('#dg_emp').datagrid('clearSelections');
+		}
+		
 	</script>
 </head>
 <body>
@@ -117,14 +178,24 @@
         		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="empList()">사원조회</a>
         		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-man" plain="true" onclick="empINS()">사원등록</a>
         		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="empUPD()">사원수정</a>
-        		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="empDEL()">사원삭제</a>				
+        		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="emp_del()">사원삭제</a>				
 				</td>
 			</tr>
 		</table>
 	</form>
 </div>	
 <!--============= 검색 조건 추가하기   끝   ===============-->
+	 
     <table id="dg_emp"></table>
+    <div class="easyui-pagination" style="border:1px solid #ccc; width:1100px;"
+        data-options="
+            total: 19,
+            pageSize: 10,
+            pageList:[2,3,5,10]
+            ">
+</div>
+    
+    	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//$('#empno').textbox("labelPosition","top");
@@ -189,10 +260,15 @@
 			$('#dlg_upd').dialog({
 				closed:true
 			});
+			$('#pp_emp').pagination({
+				pageList:[2,3,5,10]
+				,pageSize:5
+				
+			});
 			$('#dg_emp').datagrid({
 				toolbar:'#tbar_emp'
-			   ,singleSelect:true
-			   ,width: '1100px'
+			   ,singleSelect:false
+			   ,width: '1100'
 			   ,title:'사원관리 - 자바스크립트 만으로 구성하기'
 			   ,columns:[[
 			        {field:'CK', checkbox:true ,width:50,align:'center'}
@@ -209,7 +285,7 @@
 			    		,options:{
 						   valueField:'DEPTNO'//실제 서버에 넘어가는 필드
 						  ,textField:'DNAME' //화면에 출력되는 필드
-						  ,url:'./jsonDeptList.jsp'
+						  ,url:'./jsonDept.jsp'
 						  ,required:true
 			    		}////////end of options
 			    	  }//////////end of editor
@@ -249,6 +325,9 @@
 	            $(this).datagrid('refreshRow', index);
 	        }	
 	        ,onClickRow:function(index,row){
+	        	g_cnt++;
+	        	if(g_cnt==1){
+	        		
 	        	
 	        	g_empno = row.EMPNO;
 	        	g_ename = row.ENAME;
@@ -256,26 +335,12 @@
 	        	g_hiredate = row.HIREDATE;
 	        	g_sal			= row.SAL;
 	        	g_comm	= row.COMM;
+	        	var res = row.DEPTNO;
 	        	
-				var res = row.DEPTNO;
-	        	
-	        	if(res==10){
-	        		res = 'ACCOUNTING';
-	        		g_deptno = res;
-	        		$('#u_deptno').combobox('setValue',g_deptno);
-	        	}else if(res==20){
-	        		res = 'RESEARCH';
-	        		g_deptno=res;
-	        		$('#u_deptno').combobox('setValue',g_deptno);
-	        	
-	        		
+	        
 	        	}
-	        	
-	        	
+	        	alert(g_empno+','+g_ename+','+g_job);
 	        }
-	        	//alert(g_empno+','+g_ename+','+g_job);
-	        
-	        
 			});///////////////////end of datagrid			
 		});///////////////////////end of ready
 	</script>
@@ -359,7 +424,7 @@
 			 data-options="prompt:'Enter a 부서번호'
 			             ,valueField: 'DEPTNO'
                          ,textField: 'DNAME'
-                         ,url: './jsonDeptList.jsp'
+                         ,url: './jsonDept.jsp'
                          ,onSelect: function(rec){
         				  }" 
 			>
@@ -378,6 +443,17 @@
 		</div>
 		</form>
 	</div>	
+	<%
+		//수정처리가 완료된거니?
+		String mode = request.getParameter("mode");
+		if("update".equals(mode)){
+	%>
+	<script type="text/javascript">
+		empList();
+	</script>
+	<%
+		}
+	%>
 	<!--====================== 사원수정   끝  =======================-->
 	<!--====================== 사원삭제 시작 =======================-->
 	<div id="dlg_del" class="easyui-dialog" data-options="closed:true" style="width:100%;max-width:480px;padding:30px 60px">
